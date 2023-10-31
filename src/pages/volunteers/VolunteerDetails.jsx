@@ -10,7 +10,7 @@ export const VolunteerDetails = () => {
   const dispatch = useDispatch();
   const volunteers = useSelector((state) => state.volunteers.volunteers);
   const { volunteerId } = useParams();
-  const { _id, name, age, gender, medicalHistory, contactInfo, assignedWard } =
+  const  { _id, name, contactInfo, skills, availability,areasOfInterest }  =
     volunteers.find(({ _id }) => _id === volunteerId);
 
   const deleteVolunteer = createAsyncThunk(
@@ -44,18 +44,19 @@ export const VolunteerDetails = () => {
           <Heading size="md" m={1}>
             {name}
           </Heading>
-          <Heading size="xs">Age : {age}</Heading>
-          <Heading size="xs">Gender : {gender}</Heading>
-          <Heading size="xs">Ward Number : {assignedWard}</Heading>
-          <Heading size="xs">Medical History : {medicalHistory}</Heading>
-          <Heading size="xs">Contacts : {contactInfo}</Heading>
+          <Heading size="xs">Email : {contactInfo?.email}</Heading>
+          <Heading size="xs">Phone : {contactInfo?.phone}</Heading>
+          <Heading size="xs">Address : {contactInfo?.address}</Heading>
+          <Heading size="xs">Skills : {skills}</Heading>
+          <Heading size="xs">Availbility : {availability}</Heading>
+          <Heading size="xs">Areas Of Interest : {areasOfInterest}</Heading>
           <ButtonGroup m="1rem" spacing={5}>
             <Button
               colorScheme="teal"
               color="white"
               onClick={() => {
                 navigate("/volunteer/edit", {
-                  state: { _id, name, age, gender, assignedWard, medicalHistory, contactInfo },
+                  state: { _id, name, contactInfo, skills, availability,areasOfInterest },
                 });
               }}
             >

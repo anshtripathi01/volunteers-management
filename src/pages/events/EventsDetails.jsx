@@ -10,11 +10,11 @@ export const EventDetails = () => {
     const dispatch = useDispatch();
     const events = useSelector((state) => state.events.events);
     const { eventId } = useParams();
-    const { _id, eventNumber, capacity, specializations} =
+    const { _id, name, description, date, location,requiredRoles} =
       events.find(({ _id }) => _id === eventId);
   
     const deleteEvent = createAsyncThunk(
-      "events/deleteevent",
+      "events/deleteEvent",
       async (id) => {
         try {
           const response = await fetch(
@@ -37,15 +37,17 @@ export const EventDetails = () => {
     return (
       <Flex flexDirection="column" justifyContent="center" alignItems="center">
         <Heading size="md" m="1rem">
-          event Details
+          Event Details
         </Heading>
         <Card w="20rem">
           <CardBody textAlign="center">
             <Heading size="md" m={1}>
-              {eventNumber}
+              {name}
             </Heading>
-            <Heading size="xs">event Capacity : {capacity}</Heading>
-            <Heading size="xs">Specializations: {specializations}</Heading>
+            <Heading size="xs"> description : {description}</Heading>
+            <Heading size="xs">Date: {date}</Heading>
+            <Heading size="xs">Location: {location}</Heading>
+            <Heading size="xs">Required Roles: {requiredRoles}</Heading>
            
             <ButtonGroup m="1rem" spacing={5}>
               <Button
@@ -53,7 +55,7 @@ export const EventDetails = () => {
                 color="white"
                 onClick={() => {
                   navigate("/event/edit", {
-                    state: { _id, eventNumber, capacity, specializations},
+                    state: {_id, name, description, date, location, requiredRoles},
                   });
                 }}
               >

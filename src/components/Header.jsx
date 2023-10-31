@@ -22,13 +22,13 @@ export const Header = () => {
             <NavLink style={activeLink} to="/">
               Volunteer Summary
             </NavLink>
-            <NavLink style={activeLink} to="/">
+            <NavLink style={activeLink} to="/event-summary">
               Event Summary
             </NavLink>
-            <NavLink style={activeLink} to="/patients">
+            <NavLink style={activeLink} to="/volunteers">
               Volunteers
             </NavLink>
-            <NavLink style={activeLink} to="/wards">
+            <NavLink style={activeLink} to="/events">
               Events
             </NavLink>
             <NavLink style={activeLink} to="https://github.com/anshtripathi01/volunteers-management">

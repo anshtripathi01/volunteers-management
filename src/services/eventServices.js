@@ -29,7 +29,7 @@ export const addEvent = createAsyncThunk(
           body: JSON.stringify(eventData),
         }
       );
-      const event = await response.json();
+      const {event} = await response.json();
       toast.success("event Added Successfully", { autoClose: 1000 });
       return event;
     } catch (error) {

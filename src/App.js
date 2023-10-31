@@ -10,25 +10,17 @@ import { EventDetails } from "./pages/events/EventsDetails";
 import { Header } from "./components/Header";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
-import { fetchVolunteers } from "./services/volunteerServices";
-import { fetchEvents } from "./services/eventServices";
+import { EventsSummary } from "./pages/EventsSummary";
 
 function App() {
-  const dispatch = useDispatch();
-  const volunteers = useSelector((state) => state.volunteers.volunteers);
-  const events = useSelector((state) => state.events.events);
-  useEffect(() => {
-    dispatch(fetchVolunteers());
-    dispatch(fetchEvents())
-  }, [dispatch, volunteers,events]);
+  
   return (
     <Flex flexDirection="column">
     <ToastContainer />
       <Header />
       <Routes>
         <Route path="/" element={<VolunteerSummary />} />
+        <Route path="/event-summary" element={<EventsSummary />} />
         <Route path="/volunteers" element={<Volunteers />} />
         <Route path="/volunteer/add" element={<VolunteerForm />} />
         <Route path="/volunteer/edit" element={<VolunteerForm />} />

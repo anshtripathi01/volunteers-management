@@ -30,14 +30,14 @@ export const Volunteers = () => {
         </Heading>
       )}
       <Flex flexWrap="wrap" justifyContent="space-evenly">
-        {volunteers?.map(({ _id, name, gender, assignedWard }) => (
+        {volunteers?.map(({ _id, name, availability, skills }) => (
           <Card key={_id} m="1rem" p="1rem">
             <Link
               to={`/volunteers/${_id}`}
               as={NavLink}
               textDecoration="underline"
             >
-              {`${name} - ${gender} - ${assignedWard}`}
+              {`${name} - ${availability} - ${skills}`}
             </Link>
           </Card>
         ))}

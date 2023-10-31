@@ -18,6 +18,7 @@ export const fetchVolunteers = createAsyncThunk(
 export const addVolunteer = createAsyncThunk(
   "volunteers/addVolunteer",
   async (volunteerData) => {
+    console.log(volunteerData);
     try {
       const response = await fetch(
         "https://anshtripathi-assignment-22.ansh-tripathi.repl.co/api/v1/volunteers",
@@ -30,6 +31,7 @@ export const addVolunteer = createAsyncThunk(
         }
       );
       const volunteer = await response.json();
+      console.log(volunteer);
       toast.success("volunteer Added Successfully", { autoClose: 1000 });
       return volunteer;
     } catch (error) {
@@ -42,7 +44,7 @@ export const editVolunteer = createAsyncThunk(
   "volunteers/editVolunteer",
   async (data) => {
     const { volunteer, id } = data;
-    
+
     try {
       const response = await fetch(
         `https://anshtripathi-assignment-22.ansh-tripathi.repl.co/api/v1/volunteers/${id}`,

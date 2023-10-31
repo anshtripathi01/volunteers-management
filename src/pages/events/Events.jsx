@@ -2,7 +2,7 @@ import { Button, Card, Flex, Heading, Link } from '@chakra-ui/react'
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router'
-import { fetchevents } from '../../services/eventServices'
+import { fetchEvents } from '../../services/eventServices'
 import { NavLink } from 'react-router-dom'
 
 export const Events = () => {
@@ -10,7 +10,7 @@ export const Events = () => {
     const dispatch = useDispatch()
     const events = useSelector(state=>state.events.events)
     useEffect(()=>{
-        dispatch(fetchevents())
+        dispatch(fetchEvents())
     },[dispatch,events])
 
   return (
@@ -30,14 +30,14 @@ export const Events = () => {
         </Heading>
       )}
       <Flex flexWrap="wrap" justifyContent="space-evenly">
-        {events?.map(({ _id, eventNumber, capacity, specializations}) => (
+        {events?.map(({ _id, name, description, date}) => (
           <Card key={_id} m="1rem" p="1rem">
             <Link
               to={`/events/${_id}`}
               as={NavLink}
               textDecoration="underline"
             >
-              {`event Number : ${eventNumber} - Capacity : ${capacity}`}
+              {`Event Name : ${name} - Date : ${date}`}
             </Link>
           </Card>
         ))}

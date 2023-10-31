@@ -1,30 +1,30 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router';
-import { addevent, editevent } from '../../services/eventServices';
+import { addEvent, editEvent } from '../../services/eventServices';
 import { Button, Flex, Heading, Input } from '@chakra-ui/react';
 
 export const EventForm = () => {
-    const{ _id:id, eventNumber, capacity, specializations} = useLocation()?.state ?? "";
+    const{ _id:id, name, description, date, location, requiredRoles} = useLocation()?.state ?? "";
       const navigate = useNavigate();
-      const location = useLocation()?.pathname;
+      const pathLocation = useLocation()?.pathname;
       const dispatch = useDispatch();
-      const [event, setevent] = useState({ eventNumber, capacity, specializations});
+      const [event, setEvent] = useState({ name, description, date, location, requiredRoles});
       const handleUpdate = (e) => {
         e.preventDefault();
-        dispatch(editevent({ event, id }));
+        dispatch(editEvent({ event, id }));
         navigate("/events");
       };
     
       const handleAddEvent = (e, eventData) => {
         e.preventDefault();
-        dispatch(addevent(eventData));
+        dispatch(addEvent(eventData));
         navigate("/events");
       };
       return (
         <Flex flexDirection="column" justifyContent="center" alignItems="center">
           <Heading size="md" m="1rem">
-            {location === "/event/edit"
+            {pathLocation === "/event/edit"
               ? "Update event Details"
               : "Fill event Details"}
           </Heading>
@@ -36,35 +36,49 @@ export const EventForm = () => {
             justifyContent="space-evenly"
             alignItems="center"
             onSubmit={(e) => {
-              location === "/event/edit"
+              pathLocation === "/event/edit"
                 ? handleUpdate(e)
                 : handleAddEvent(e, event);
             }}
           >
             <Input
-              onChange={(e) => setevent({ ...event, eventNumber: e.target.value })}
-              type="number"
-              placeholder="Enter event number"
-              defaultValue={eventNumber}
-              required
-            />
-            <Input
-              onChange={(e) => setevent({ ...event, capacity: e.target.value })}
-              type="number"
-              placeholder="Capacity"
-              defaultValue={capacity}
-              required
-            />
-            <Input
-              onChange={(e) => setevent({ ...event, specializations: e.target.value })}
+              onChange={(e) => setEvent({ ...event, name: e.target.value })}
               type="text"
-              placeholder="Specializations"
-              defaultValue={specializations}
+              placeholder="Enter event name"
+              defaultValue={name}
+              required
+            />
+            <Input
+              onChange={(e) => setEvent({ ...event, description: e.target.value })}
+              type="text"
+              placeholder="description"
+              defaultValue={description}
+              required
+            />
+            <Input
+              onChange={(e) => setEvent({ ...event, date: e.target.value })}
+              type="text"
+              placeholder="DD-MM-YYY"
+              defaultValue={date}
+              required
+            />
+             <Input
+              onChange={(e) => setEvent({ ...event, location: e.target.value })}
+              type="text"
+              placeholder="Event Location"
+              defaultValue={location}
+              required
+            />
+            <Input
+              onChange={(e) => setEvent({ ...event, requiredRoles: e.target.value })}
+              type="number"
+              placeholder="Required Roles"
+              defaultValue={requiredRoles}
               required
             />
     
             <Button type="submit" m="1rem" colorScheme="teal" color="white">
-              {location === "/event/edit" ? "Update" : "Add"}
+              {pathLocation === "/event/edit" ? "Update" : "Add"}
             </Button>
           </Flex>
         </Flex>

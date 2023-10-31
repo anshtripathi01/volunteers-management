@@ -5,26 +5,11 @@ import { useLocation, useNavigate } from "react-router";
 import { addVolunteer, editVolunteer } from "../../services/volunteerServices";
 
 export const VolunteerForm = () => {
-  const {
-    _id: id,
-    name,
-    age,
-    gender,
-    assignedWard,
-    medicalHistory,
-    contactInfo,
-  } = useLocation()?.state ?? "";
+  const { _id:id, name, contactInfo, skills, availability,areasOfInterest } = useLocation()?.state ?? "";
   const navigate = useNavigate();
   const location = useLocation()?.pathname;
   const dispatch = useDispatch();
-  const [volunteer, setvolunteer] = useState({
-    name,
-    age,
-    gender,
-    assignedWard,
-    medicalHistory,
-    contactInfo,
-  });
+  const [volunteer, setVolunteer] = useState({ name, contactInfo, skills, availability, areasOfInterest });
   const handleUpdate = (e) => {
     e.preventDefault();
     dispatch(editVolunteer({ volunteer, id }));
@@ -57,47 +42,43 @@ export const VolunteerForm = () => {
         }}
       >
         <Input
-          onChange={(e) => setvolunteer({ ...volunteer, name: e.target.value })}
+          onChange={(e) => setVolunteer({ ...volunteer, name: e.target.value })}
           type="text"
           placeholder="Enter volunteer name"
           defaultValue={name}
           required
         />
         <Input
-          onChange={(e) => setvolunteer({ ...volunteer, age: e.target.value })}
-          type="number"
-          placeholder="age"
-          defaultValue={age}
-          required
-        />
-        <Input
-          onChange={(e) => setvolunteer({ ...volunteer, gender: e.target.value })}
+          onChange={(e) => setVolunteer({ ...volunteer, contactInfo: e.target.value})}
           type="text"
-          placeholder="gender"
-          defaultValue={gender}
+          placeholder="Contact Details"
+          defaultValue={contactInfo}
           required
         />
+      
         <Input
-          onChange={(e) => setvolunteer({ ...volunteer, assignedWard: e.target.value })}
-          type="number"
-          placeholder="ward number"
-          defaultValue={assignedWard}
-          required
-        />
-        <Input
-          onChange={(e) => setvolunteer({ ...volunteer, medicalHistory: e.target.value })}
+          onChange={(e) => setVolunteer({ ...volunteer, skills: e.target.value })}
           type="text"
-          placeholder="Medical History"
-          defaultValue={medicalHistory}
+          placeholder="Skills"
+          defaultValue={skills}
           required
         />
         <Input
           onChange={(e) =>
-            setvolunteer({ ...volunteer, contactInfo: e.target.value })
+            setVolunteer({ ...volunteer, availability: e.target.value })
           }
           type="text"
-          placeholder="contact details"
-          defaultValue={contactInfo}
+          placeholder="Availability"
+          defaultValue={availability}
+          required
+        />
+         <Input
+          onChange={(e) =>
+            setVolunteer({ ...volunteer, areasOfInterest: e.target.value })
+          }
+          type="text"
+          placeholder="Areas Of Interest"
+          defaultValue={areasOfInterest}
           required
         />
 
