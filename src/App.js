@@ -10,7 +10,7 @@ import { EventDetails } from "./pages/events/EventsDetails";
 import { Header } from "./components/Header";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { EventsSummary } from "./pages/EventsSummary";
+import { EventSummary } from "./pages/EventSummary";
 
 function App() {
   
@@ -20,7 +20,7 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<VolunteerSummary />} />
-        <Route path="/event-summary" element={<EventsSummary />} />
+        <Route path="/event-summary" element={<EventSummary />} />
         <Route path="/volunteers" element={<Volunteers />} />
         <Route path="/volunteer/add" element={<VolunteerForm />} />
         <Route path="/volunteer/edit" element={<VolunteerForm />} />
